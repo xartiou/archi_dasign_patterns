@@ -1,3 +1,4 @@
+
 def application(environ, start_response):
     """
     :param environ: словарь данных от сервера

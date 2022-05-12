@@ -1,6 +1,6 @@
 from wsgiref.simple_server import make_server
 
-
+# нужно переместить во views
 def index_view():
     return '200 OK', [b'Index']
 
@@ -12,13 +12,13 @@ def abc_view():
 def not_found_404_view():
     return '404 WHAT', [b'404 PAGE Not Found']
 
-
+# нужно переместить в urls
 routes = {
     '/': index_view,
     '/abc/': abc_view,
 }
 
-
+# заготовка фреймворка должна быть в отдельном файле
 class Application:
 
     def __init__(self, routes):
@@ -35,7 +35,7 @@ class Application:
         start_response(code, [('Content-Type', 'text/html')])
         return body
 
-
+# запускающий файл run
 application = Application(routes)
 
 with make_server('', 8000, application) as httpd:

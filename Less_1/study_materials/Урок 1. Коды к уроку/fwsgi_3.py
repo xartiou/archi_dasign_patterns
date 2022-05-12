@@ -1,10 +1,12 @@
 from wsgiref.simple_server import make_server
 
 
+# теперь фреймворк становится связан с вебприложением
 def application(environ, start_response):
     print(type(environ))
     print(environ)
     path = environ['PATH_INFO']
+    # заготовка Page Controller
     if path == '/':
         start_response('200 OK', [('Content-Type', 'text/html')])
         return [b'Index']

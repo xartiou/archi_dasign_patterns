@@ -14,7 +14,7 @@ def not_found_404_view():
 
 
 class Other:
-
+    # обязательно должен быть __call__ для вызова
     def __call__(self):
         return '200 OK', [b'other']
 
@@ -22,7 +22,7 @@ class Other:
 routes = {
     '/': index_view,
     '/abc/': abc_view,
-    '/other/': Other()
+    '/other/': Other()  # создаем объект класса для вызова
 }
 
 

@@ -29,7 +29,7 @@ routes = {
     '/other/': Other()
 }
 
-
+# функции добавляют данные в словарь
 def secret_front(request):
     request['secret'] = 'some secret'
 
