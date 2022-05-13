@@ -1,7 +1,15 @@
+"""
+Теперь нам нужно реализовать фреймворк так, чтобы можно было писать модели отдельно, вьюшки отдельно,
+url-привязки, шаблоны отдельно и т.д.
+"""
+
 from wsgiref.simple_server import make_server
 
 
-# page controller
+""" page controller """
+
+
+#  делаем отдельно вьюшки
 def index_view(request):
     print(request)
     # возвращаем тело ответа в виде списка из bite
@@ -18,6 +26,7 @@ def not_found_404_view(request):
     return '404 WHAT', [b'404 PAGE Not Found']
 
 
+# Теперь у нас есть вьюшки И привязки их к адресам
 routes = {
     '/': index_view,
     '/abc/': abc_view,
