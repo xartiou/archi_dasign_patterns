@@ -1,7 +1,7 @@
 from wsgiref.simple_server import make_server
 
 
-# page controller
+# views
 def index_view(request):
     print(request)
     return '200 OK', [b'Index']
@@ -17,10 +17,16 @@ def not_found_404_view(request):
     return '404 WHAT', [b'404 PAGE Not Found']
 
 
+# urls
 routes = {
     '/': index_view,
     '/abc/': abc_view,
 }
+
+"""
+Поскольку приложением у нас должен быть callable-объект, 
+то для решения проблемы мы вместо функции application сделаем класс Application и перегрузим в нем метод __call__().
+"""
 
 
 class Application:
