@@ -35,6 +35,7 @@ class Application:
         start_response(code, [('Content-Type', 'text/html')])
         return body
 
+
 # запускающий файл run
 application = Application(routes)
 
