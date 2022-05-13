@@ -1,5 +1,6 @@
 from wsgiref.simple_server import make_server
 
+
 # нужно переместить во views
 def index_view():
     return '200 OK', [b'Index']
@@ -27,6 +28,8 @@ class Application:
     def __call__(self, environ, start_response):
 
         path = environ['PATH_INFO']
+        # Будем проверять, есть ли указанный путь в routes
+        # извлекаем из словаря соответствующую функцию и вызываем ее
         if path in self.routes:
             view = self.routes[path]
         else:
