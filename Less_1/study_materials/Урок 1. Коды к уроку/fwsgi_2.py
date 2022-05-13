@@ -1,4 +1,5 @@
 from wsgiref.simple_server import make_server
+"""Для запуска используем wsgiref"""
 
 
 # заготовка фреймворка
