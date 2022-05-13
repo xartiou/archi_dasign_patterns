@@ -13,6 +13,11 @@ def not_found_404_view():
     return '404 WHAT', [b'404 PAGE Not Found']
 
 
+"""
+Можно также сделать, что возвращаться будет не строка, а html-страница.
+"""
+
+
 class Other:
 
     def __call__(self):
