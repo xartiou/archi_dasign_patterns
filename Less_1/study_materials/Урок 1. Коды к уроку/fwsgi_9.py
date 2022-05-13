@@ -1,3 +1,9 @@
+"""
+ зачем нам вообще может понадобиться FC?
+ Он позволяет добавить параметр в запрос и этот запрос получат одновременно все «вьюшки».
+"""
+
+
 from wsgiref.simple_server import make_server
 
 
@@ -28,6 +34,7 @@ routes = {
     '/abc/': abc_view,
     '/other/': Other()
 }
+
 
 # функции добавляют данные в словарь
 def secret_front(request):
