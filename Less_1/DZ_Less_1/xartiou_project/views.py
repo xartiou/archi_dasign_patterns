@@ -3,7 +3,7 @@ from xartiou_framework.templator import render
 
 class Index:
     def __call__(self, request):
-        return '200 OK', render('index.html', style=request.get('style', None))
+        return '200 OK', render('index.html', style=request.get('css/style.css', None))
 
 
 class About:
