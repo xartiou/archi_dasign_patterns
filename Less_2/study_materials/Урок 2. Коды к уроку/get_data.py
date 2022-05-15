@@ -1,6 +1,8 @@
 from wsgiref.simple_server import make_server
+# http://127.0.0.1:8000?id=1&category=10
 
 
+# функция для распарсивания
 def parse_input_data(data):
     result = {}
     if data:
@@ -13,6 +15,7 @@ def parse_input_data(data):
     return result
 
 
+# 127.0.0.1:8000?id=1&category=10 -  запрос с параметрами
 def application(environ, start_response):
     query_string = environ['QUERY_STRING']
     print(query_string)  # -> 'id=1&category=10'

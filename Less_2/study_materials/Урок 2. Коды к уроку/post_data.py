@@ -1,5 +1,13 @@
 from wsgiref.simple_server import make_server
 
+"""
+при GET запросе:
+    str ---> dict
+при POST запросе:
+    bytes --> str --> dict
+       
+"""
+
 
 def parse_input_data(data: str):
     result = {}
@@ -13,6 +21,7 @@ def parse_input_data(data: str):
     return result
 
 
+# функция из словаря получает байты
 def get_wsgi_input_data(env) -> bytes:
     # получаем длину тела, они приходит в строковом формате
     content_length_data = env.get('CONTENT_LENGTH')
@@ -24,6 +33,7 @@ def get_wsgi_input_data(env) -> bytes:
     return data
 
 
+# функция для перевода байтов к строке, парсим строку и получаем словарь
 def parse_wsgi_input_data(data: bytes) -> dict:
     result = {}
     if data:
