@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+        @import {{style}};
+    </style>
+	<meta charset="utf-8">
+	<title>Главная</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="content">
+	<div class="header">
+		<a href="#">Главная</a>
+		<a href="about">О нас</a>
+		<a href="contacts">Контакты</a>
+	</div>
+
+	<h1>Создаю сайт, а тему придумаю позже.</h1>
+
+	<div class="center">
+	<img src="images/p_lent.jpg">
+		<div class="box_text">
+			<p>Добрый день! Сегодня мы обрабатываем GET и POST запросы.<b><i> XARTIOU.RU </i></b>.</p>
+			<p>Архитектура и шаблоны проектирования на Python. Урок 2.</p>
+		</div>
+	</div>
+</div>
+		<form action="" method="post">
+			<fieldset>
+				<legend>Зарегистрируйтесь</legend>
+				<p><label class="title" for="name">Ваше имя:</label>
+					 <input type="text" name="name" id="name"><br />
+					 <label class="title" for="email">Ваш email:</label>
+					 <input type="text" name="email" id="email"></p>
+
+				<p><label for="location" class="title">Ближайший город:</label>
+					 <select name="location" id="location">
+						 <option value="ny">Москва</option>
+						 <option value="il">Санкт-Петербург</option>
+						 <option value="ca">Краснодар</option>
+						 <option value="ca">другой</option>
+					 </select></p>
+
+				<span class="title">Являетесь участником?</span>
+					<label><input type="radio" name="member" value="yes" /> Да</label>
+					<label><input type="radio" name="member" value="no" /> Нет</label>
+			</fieldset>
+
+ 	    	<div class="submit"><input type="submit" value="Регистрация" /></div>
+		</form>
+<div class="footer">
+	Copyright &copy; <?php echo "2022";?> <i>Xartiou</i>
+</div>
+</body>
+</html>
