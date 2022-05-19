@@ -59,6 +59,7 @@ class Framework:
     @staticmethod
     # Получаем и декодируем параметры post запроса
     def decode_value(data):
+        # функция нужна для того, чтобы объект data распарсить, заменить символы декодировать и записать в словарь
         new_data = {}
         for k, v in data.items():
             val = bytes(v.replace('%', '=').replace("+", " "), 'UTF-8')
