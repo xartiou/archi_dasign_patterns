@@ -51,3 +51,6 @@ class CAD:
     def draw_all(cls, figures):
         for figure in figures:
             figure.draw()
+
+# открыт для расширения
+# закрыт для изменения

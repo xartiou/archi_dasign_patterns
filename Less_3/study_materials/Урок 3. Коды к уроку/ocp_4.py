@@ -22,6 +22,7 @@ class Line(Figure):
 
 
 # САПР
+# class CAD - отрисовка фигур
 class CAD:
     @classmethod
     def draw_all(cls, figures):

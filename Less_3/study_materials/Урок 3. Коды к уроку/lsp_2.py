@@ -36,7 +36,7 @@ class SquareTest(unittest.TestCase):
         rectangle = SquareImmutable(4)
         # тест пройден
         # .width = 3
-        rectangle.width = 5
+        # rectangle.width = 5
         self.assertEqual(rectangle.area, 16)
 
         # пытаемся изменить атрибуты

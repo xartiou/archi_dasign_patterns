@@ -1,4 +1,5 @@
 # bad
+# нарушается принцип SRP, ведь класс делает слишком много. И делает то, что он делать не должен – save, load.
 class Order:
     def get_items(self):
         pass
@@ -15,9 +16,12 @@ class Order:
     def load(self):
         pass
 
-
+# ________________________________________________________________________
+#  Предлагается разделить класс на два: GoodOrder и OrderRepository.
 # good
-class Order:
+
+
+class GoodOrder:
     def get_items(self):
         pass
 
@@ -28,7 +32,7 @@ class Order:
         pass
 
 
-class Repository:
+class OrderRepository:
     def save(self):
         pass
 
