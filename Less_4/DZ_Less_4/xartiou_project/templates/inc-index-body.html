@@ -1,0 +1,56 @@
+<div class="content">
+    <h1>Виды корабельных вахт.</h1>
+    <p>Курсы в течение года.</p>
+    <p>Расписание вахт на: {{date}} <b>(дата подставляется шаблоном)</b></p>
+    <table>
+        <tr class="head">
+            <th></th>
+            <th>Рулевая вахта</th>
+            <th>Моторная вахта</th>
+            <th>Палубная вахта</th>
+        </tr>
+        <tr>
+            <th>Рулевой матрос</th>
+            <td>Матрос1<br />00:00 - 04:00 и 12:00 - 16:00</td>
+            <td>Матрос2<br />04:00 - 08:00 и 16:00 - 20:00</td>
+            <td>Матрос3<br />08:00 - 12:00 и 20:00 - 24:00</td>
+        </tr>
+        <tr class="even">
+            <th>Вахтенный моторист</th>
+            <td>Моторист1<br />00:00 - 04:00 и 12:00 - 16:00</td>
+            <td>Моторист2<br />04:00 - 08:00 и 16:00 - 20:00</td>
+            <td>Моторист3<br />08:00 - 12:00 и 20:00 - 24:00</td>
+        </tr>
+        <tr>
+            <th>Палубный матрос</th>
+            <td>Матрос1<br />09:00 - 18:00</td>
+            <td>Матрос1<br />09:00 - 18:00</td>
+            <td>Матрос1<br />09:00 - 18:00</td>
+        </tr>
+        <tr class="even">
+            <th>Общесудовые работы</th>
+            <td>Юнга1<br />09:00 - 18:00</td>
+            <td>Юнга2<br />09:00 - 18:00</td>
+            <td>Юнга3<br />09:00 - 18:00</td>
+        </tr>
+    </table>
+    <form action="" method="post">
+        <fieldset>
+            <legend>Зарегистрируйтесь</legend>
+            <p><label class="title" for="name">Ваше имя:</label>
+                 <input type="text" name="name" id="name"><br />
+                 <label class="title" for="email">Ваш email:</label>
+                 <input type="text" name="email" id="email"></p>
+            <p><label for="location" class="title">Ближайший порт:</label>
+                 <select name="location" id="location">
+                     <option value="msk">Владивосток</option>
+                     <option value="spb">Санкт-Петербург</option>
+                     <option value="ekb">Одесса</option>
+                 </select></p>
+            <span class="title">Ходили в море ?</span>
+            <label><input type="radio" name="member" value="yes" /> Да</label>
+            <label><input type="radio" name="member" value="no" /> Нет</label></p>
+        </fieldset>
+    <div class="submit"><input type="submit" value="Регистрация" /></div>
+    </form>
+</div>
