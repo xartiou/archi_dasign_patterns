@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+# Цель – у нас есть сложный объект. Который мы хотим строить по частям и не зависеть от представлений.
+
 
 class TableDirector:
     def __init__(self):
