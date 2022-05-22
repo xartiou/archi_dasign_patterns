@@ -1,5 +1,7 @@
 from copy import deepcopy
 
+# Цель – просто копировать объект
+
 
 class PrototypeMixin:
     # прототип
