@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+# Цель – есть некоторая иерархия объектов и мы хотим не зависеть от конкретики в клиентском коде.
+
 
 class Animal(ABC):
 
