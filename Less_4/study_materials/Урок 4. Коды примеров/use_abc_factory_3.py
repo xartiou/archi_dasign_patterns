@@ -1,6 +1,7 @@
 from abc_factory_3 import AbstractFactory
 
-factory = AbstractFactory.create_factory('Od')
+factory_type = input()
+factory = AbstractFactory.create_factory(factory_type)
 
 parser = factory.create_parser()
 analizer = factory.create_analizer()
