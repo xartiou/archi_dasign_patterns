@@ -7,6 +7,9 @@ class Animal(ABC):
     def say(self):
         pass
 
+    # определяет интерфейс для создания объектов,
+    # при этом выбранный класс инстанцируется подклассами
+
     @staticmethod
     def create_animal(animal_type):
         ANIMALS = {
