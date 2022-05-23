@@ -1,7 +1,7 @@
 from datetime import date
+from xartiou_framework.templator import render
+from patterns.creational_patterns import Engine, Logger
 
-from simba_framework.templator import render
-from patterns.сreational_patterns import Engine, Logger
 
 site = Engine()
 logger = Logger('main')
@@ -10,43 +10,42 @@ logger = Logger('main')
 # контроллер - главная страница
 class Index:
     def __call__(self, request):
-        return '200 OK', render('index.html', objects_list=site.categories)
+        return '200 OK', render('index.html', style=request.get('style', None))
 
 
 # контроллер "О проекте"
 class About:
     def __call__(self, request):
-        return '200 OK', render('about.html')
-
-
-# контроллер - Расписания
-class StudyPrograms:
-    def __call__(self, request):
-        return '200 OK', render('study-programs.html', date=date.today())
+        return '200 OK', render('about.html', style=request.get('style', None))
 
 
 # контроллер 404
-class NotFound404:
+class PageNotExists:
     def __call__(self, request):
         return '404 WHAT', '404 PAGE Not Found'
 
 
-# контроллер - список курсов
-class CoursesList:
+# контроллер - Расписания вахт
+class WatchTimetables:
     def __call__(self, request):
-        logger.log('Список курсов')
+        return '200 OK', render('watch_timetables.html', date=date.today())
+
+
+# контроллер - список вахт
+class WatchesList:
+    def __call__(self, request):
+        logger.log('Список вахт')
         try:
-            category = site.find_category_by_id(
-                int(request['request_params']['id']))
-            return '200 OK', render('course_list.html',
-                                    objects_list=category.courses,
+            category = site.find_category_by_id(int(request['request_params']['id']))
+            return '200 OK', render('watch_list.html',
+                                    objects_list=category.watches,
                                     name=category.name, id=category.id)
         except KeyError:
-            return '200 OK', 'No courses have been added yet'
+            return '200 OK', 'Вахты еще не добавлены.'
 
 
-# контроллер - создать курс
-class CreateCourse:
+# контроллер - создать вахту
+class CreateWatch:
     category_id = -1
 
     def __call__(self, request):
@@ -61,11 +60,11 @@ class CreateCourse:
             if self.category_id != -1:
                 category = site.find_category_by_id(int(self.category_id))
 
-                course = site.create_course('record', name, category)
-                site.courses.append(course)
+                watch = site.create_watch('record', name, category)
+                site.watches.append(watch)
 
-            return '200 OK', render('course_list.html',
-                                    objects_list=category.courses,
+            return '200 OK', render('watch_list.html',
+                                    objects_list=category.watches,
                                     name=category.name,
                                     id=category.id)
 
@@ -74,11 +73,11 @@ class CreateCourse:
                 self.category_id = int(request['request_params']['id'])
                 category = site.find_category_by_id(int(self.category_id))
 
-                return '200 OK', render('create_course.html',
+                return '200 OK', render('create_watch.html',
                                         name=category.name,
                                         id=category.id)
             except KeyError:
-                return '200 OK', 'No categories have been added yet'
+                return '200 OK', 'Категории еще не добавлены'
 
 
 # контроллер - создать категорию
@@ -118,23 +117,29 @@ class CategoryList:
                                 objects_list=site.categories)
 
 
-# контроллер - копировать курс
-class CopyCourse:
+# контроллер - копировать вахту
+class CopyWatch:
     def __call__(self, request):
         request_params = request['request_params']
 
         try:
             name = request_params['name']
 
-            old_course = site.get_course(name)
-            if old_course:
+            old_watch = site.get_watch(name)
+            if old_watch:
                 new_name = f'copy_{name}'
-                new_course = old_course.clone()
-                new_course.name = new_name
-                site.courses.append(new_course)
+                new_watch = old_watch.clone()
+                new_watch.name = new_name
+                site.watches.append(new_watch)
 
-            return '200 OK', render('course_list.html',
-                                    objects_list=site.courses,
-                                    name=new_course.category.name)
+            return '200 OK', render('watch_list.html',
+                                    objects_list=site.watches,
+                                    name=new_watch.category.name)
         except KeyError:
-            return '200 OK', 'No courses have been added yet'
+            return '200 OK', 'Курсы еще не добавлены'
+
+# контроллер "Контакты"
+class Contacts:
+    def __call__(self, request):
+        return '200 OK', render('contacts.html', style=request.get('style', None))
+

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Создание курса
+Создание вахты
 {% endblock %}
 {% block style %}
 	{% include "inc-style.html" %}
@@ -10,17 +10,21 @@
 {% endblock %}
 {% block body %}
     <div>
-        <a href="/courses-list/?id={{id}}">назад</a>
+        <a href="/watch_list/?id={{id}}">назад</a>
     </div>
 
     <br>
     <br>
 
     <div>
-        <h1>Создание курса для категории "{{name}}"</h1>
+        <h1>Создание вахты для категории "{{name}}"</h1>
         <form method="post">
             <input type="text" name="name" placeholder="Название">
-            <button type="submit">Сохранить и вернуться к списку курсов</button>
+            <button type="submit">Сохранить и вернуться к списку вахт</button>
         </form>
     </div>
+{% endblock %}
+
+{% block footer %}
+	{% include "inc-footer.html" %}
 {% endblock %}

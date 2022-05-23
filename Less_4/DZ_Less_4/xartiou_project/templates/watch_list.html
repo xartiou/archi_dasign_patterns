@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Список курсов
+Список вахт
 {% endblock %}
 {% block style %}
 	{% include "inc-style.html" %}
@@ -17,13 +17,17 @@
     <br>
 
     <div>
-        <a href="/create-course/?id={{id}}">Создать новый курс</a>
+        <a href="/create_watch/?id={{id}}">Создать новую вахту</a>
         <br>
-        <h1>Список курсов для категории "{{name}}"</h1>
+        <h1>Список вахт для категории "{{name}}"</h1>
         {% for item in objects_list %}
         <li>
-            {{item.name}} <span><a href="/copy-course/?name={{item.name}}">скопировать</a></span>
+            {{item.name}} <span><a href="/copy_watch/?name={{item.name}}">скопировать вахту</a></span>
         </li>
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block footer %}
+	{% include "inc-footer.html" %}
 {% endblock %}

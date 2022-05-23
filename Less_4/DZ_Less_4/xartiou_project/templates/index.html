@@ -1,26 +1,23 @@
 {% extends "base.html" %}
 {% block title %}
-	Главная
+Главная страница
 {% endblock %}
-
 {% block style %}
 	{% include "inc-style.html" %}
 {% endblock %}
-
 {% block menu %}
 	{% include "inc-menu.html" %}
 {% endblock %}
-
 {% block body %}
 	<div>
-		<a href="/create-category/">Создать новую вахту.</a>
+		<a href="/create_category/">Создать новую категорию вахт</a>
 	</div>
 	<div>
-		<h1>Список существующих вахт.</h1>
-        {% for item in watch_list %}
+		<h1>Список существующих категорий вахт</h1>
+        {% for item in objects_list %}
         <li>
-            {{item.name}} <span>Количество курсов: {{item.watch_count()}}</span>
-			<a href="/watch-list/?id={{item.id}}">Показать вахты</a>
+            {{item.name}} <span>Количество вахт: {{item.watch_count()}}</span>
+			<a href="/watch_list/?id={{item.id}}">Показать вахты</a>
         </li>
         {% endfor %}
 	</div>
