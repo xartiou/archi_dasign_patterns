@@ -1,7 +1,15 @@
-w = 0
+def decorator(old_f):
+    def inner(*args, **kwargs):
+        print('two')
+        return old_f(*args, **kwargs)
 
-for i in range(10):
-    for j in range(-1, -10, -1):
-        w += 1
+    return inner
 
-print(w)
+
+@decorator
+def old():
+    print('one')
+
+
+old = decorator(old)
+old()

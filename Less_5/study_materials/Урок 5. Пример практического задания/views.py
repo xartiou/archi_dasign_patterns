@@ -30,7 +30,7 @@ class About:
 class StudyPrograms:
     @Debug(name='StudyPrograms')
     def __call__(self, request):
-        return '200 OK', render('study-programs.html', data=date.today())
+        return '200 OK', render('watch_timetables.html', data=date.today())
 
 
 # контроллер 404
@@ -48,7 +48,7 @@ class CoursesList:
         try:
             category = site.find_category_by_id(
                 int(request['request_params']['id']))
-            return '200 OK', render('course_list.html',
+            return '200 OK', render('watch_list.html',
                                     objects_list=category.courses,
                                     name=category.name, id=category.id)
         except KeyError:
@@ -75,7 +75,7 @@ class CreateCourse:
                 course = site.create_course('record', name, category)
                 site.courses.append(course)
 
-            return '200 OK', render('course_list.html',
+            return '200 OK', render('watch_list.html',
                                     objects_list=category.courses,
                                     name=category.name,
                                     id=category.id)
@@ -85,7 +85,7 @@ class CreateCourse:
                 self.category_id = int(request['request_params']['id'])
                 category = site.find_category_by_id(int(self.category_id))
 
-                return '200 OK', render('create_course.html',
+                return '200 OK', render('create_watch.html',
                                         name=category.name,
                                         id=category.id)
             except KeyError:
@@ -147,7 +147,7 @@ class CopyCourse:
                 new_course.name = new_name
                 site.courses.append(new_course)
 
-            return '200 OK', render('course_list.html',
+            return '200 OK', render('watch_list.html',
                                     objects_list=site.courses,
                                     name=new_course.category.name)
         except KeyError:

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+Список Вахт
+{% endblock %}
+{% block style %}
+	{% include "inc-style.html" %}
+{% endblock %}
+{% block menu %}
+	{% include "inc-menu.html" %}
+{% endblock %}
+{% block body %}
+    <a href="/">назад</a>
+
+    <h1>Список категорий</h1>
+    <ul>
+
+        {% for item in objects_list %}
+        <li>
+            {{item.name}} <span>Количество Вахт: {{item.watch_count()}}</span>
+        </li>
+        {% endfor %}
+    </ul>
+
+	<div>
+		<li><a href="/watches-list/">Список вахт</a></li>
+		<li><a href="/create-watch/">Создать вахту</a></li>
+	</div>
+{% endblock %}
