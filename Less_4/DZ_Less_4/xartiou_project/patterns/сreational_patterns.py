@@ -7,7 +7,7 @@ class User:
     pass
 
 
-# командир БЧ
+# офицер
 class Officer(User):
     pass
 
@@ -31,7 +31,7 @@ class UserFactory:
 
 # порождающий паттерн Прототип
 class WatchPrototype:
-    # прототип вахт корабля
+    # прототип вахт на корабле
 
     def clone(self):
         return deepcopy(self)
@@ -46,19 +46,19 @@ class Watch(WatchPrototype):
 
 
 # Морская вахта
-class SeaWatch(Watch):
+class SeeWatch(Watch):
     pass
 
 
-# Общекорабельная Вахта
-class GeneralshipWatch(Watch):
+# портовая вахта
+class PortWatch(Watch):
     pass
 
 
 class WatchFactory:
     types = {
-        'seawatch': SeaWatch,
-        'generalshipwatch': GeneralshipWatch
+        'seewatch': SeeWatch,
+        'portwatch': PortWatch
     }
 
     # порождающий паттерн Фабричный метод
@@ -88,8 +88,8 @@ class Category:
 # основной интерфейс проекта
 class Engine:
     def __init__(self):
-        self.officer = []
-        self.watchman = []
+        self.officers = []
+        self.watchmans = []
         self.watches = []
         self.categories = []
 
