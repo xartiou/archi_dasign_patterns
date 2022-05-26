@@ -17,17 +17,13 @@
     <br>
 
     <div>
-        <a href="/create_watch/?id={{id}}">Создать новую вахту</a>
+        <a href="/create-watch/?id={{id}}">Создать новую вахту</a>
         <br>
         <h1>Список вахт для категории "{{name}}"</h1>
         {% for item in objects_list %}
         <li>
-            {{item.name}} <span><a href="/copy_watch/?name={{item.name}}">скопировать вахту</a></span>
+            {{item.name}} <span><a href="/copy-watch/?name={{item.name}}">скопировать вахту</a></span>
         </li>
         {% endfor %}
     </div>
-{% endblock %}
-
-{% block footer %}
-	{% include "inc-footer.html" %}
 {% endblock %}

@@ -1,6 +1,6 @@
 from datetime import date
 from xartiou_framework.templator import render
-from patterns.creational_patterns import Engine, Logger
+from patterns.сreational_patterns import Engine, Logger
 
 
 site = Engine()
@@ -19,16 +19,16 @@ class About:
         return '200 OK', render('about.html', style=request.get('style', None))
 
 
-# контроллер 404
-class PageNotExists:
-    def __call__(self, request):
-        return '404 WHAT', '404 PAGE Not Found'
-
-
 # контроллер - Расписания вахт
 class WatchTimetables:
     def __call__(self, request):
         return '200 OK', render('watch_timetables.html', date=date.today())
+
+
+# контроллер 404
+class PageNotExists:
+    def __call__(self, request):
+        return '404 WHAT', '404 PAGE Not Found'
 
 
 # контроллер - список вахт
@@ -36,12 +36,13 @@ class WatchesList:
     def __call__(self, request):
         logger.log('Список вахт')
         try:
-            category = site.find_category_by_id(int(request['request_params']['id']))
+            category = site.find_category_by_id(
+                int(request['request_params']['id']))
             return '200 OK', render('watch_list.html',
                                     objects_list=category.watches,
                                     name=category.name, id=category.id)
         except KeyError:
-            return '200 OK', 'Вахты еще не добавлены.'
+            return '200 OK', 'No watches have been added yet'
 
 
 # контроллер - создать вахту
@@ -77,7 +78,7 @@ class CreateWatch:
                                         name=category.name,
                                         id=category.id)
             except KeyError:
-                return '200 OK', 'Категории еще не добавлены'
+                return '200 OK', 'No watches have been added yet'
 
 
 # контроллер - создать категорию
@@ -136,10 +137,10 @@ class CopyWatch:
                                     objects_list=site.watches,
                                     name=new_watch.category.name)
         except KeyError:
-            return '200 OK', 'Курсы еще не добавлены'
+            return '200 OK', 'No watches have been added yet'
+
 
 # контроллер "Контакты"
 class Contacts:
     def __call__(self, request):
         return '200 OK', render('contacts.html', style=request.get('style', None))
-

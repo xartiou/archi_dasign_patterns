@@ -18,10 +18,10 @@ routes = {
     '/': Index(),
     '/about/': About(),
     '/contacts/': Contacts(),
-    '/watch_timetables/': WatchTimetables(),
-    '/watch_list/': WatchesList(),
-    '/create_watch/': CreateWatch(),
-    '/create_category/': CreateCategory(),
-    '/category_list/': CategoryList(),
-    '/copy_watch/': CopyWatch()
+    '/watch-timetables/': WatchTimetables(),
+    '/watch-list/': WatchesList(),
+    '/create-watch/': CreateWatch(),
+    '/create-category/': CreateCategory(),
+    '/category-list/': CategoryList(),
+    '/copy-watch/': CopyWatch()
 }
