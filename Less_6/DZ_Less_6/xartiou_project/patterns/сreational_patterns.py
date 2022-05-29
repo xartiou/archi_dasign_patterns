@@ -1,6 +1,6 @@
 import copy
 from quopri import decodestring
-from behavioral_patterns import Subject, FileWriter
+from behavioral_patterns import Subject, FileWriter, ConsoleWriter
 
 
 # абстрактный пользователь
@@ -31,8 +31,8 @@ class UserFactory:
 
     # порождающий паттерн Фабричный метод
     @classmethod
-    def create(cls, type_):
-        return cls.types[type_]()
+    def create(cls, type_, name):
+        return cls.types[type_](name)
 
 
 # порождающий паттерн Прототип - Курс
@@ -112,8 +112,8 @@ class Engine:
         self.categories = []
 
     @staticmethod
-    def create_user(type_):
-        return UserFactory.create(type_)
+    def create_user(type_, name):
+        return UserFactory.create(type_, name)
 
     @staticmethod
     def create_category(name, category=None):
@@ -170,7 +170,7 @@ class SingletonByName(type):
 
 class Logger(metaclass=SingletonByName):
 
-    def __init__(self, name, writer=FileWriter()):
+    def __init__(self, name, writer=ConsoleWriter()):
         self.name = name
         self.writer = writer
 

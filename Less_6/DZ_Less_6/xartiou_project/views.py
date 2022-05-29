@@ -7,7 +7,7 @@ from patterns.behavioral_patterns import SmsNotifier, EmailNotifier, \
     ListView, CreateView, BaseSerializer, ConsoleWriter, FileWriter
 
 site = Engine()
-logger = Logger('main', ConsoleWriter())
+logger = Logger('main')
 sms_notifier = SmsNotifier()
 email_notifier = EmailNotifier
 
