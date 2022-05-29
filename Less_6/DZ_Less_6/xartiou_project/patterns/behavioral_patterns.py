@@ -36,6 +36,7 @@ class EmailNotifier(Observer):
         print(('EMAIL->', 'к нам присоединился', subject.watchmans[-1].name))
 
 
+# выполняет сериализацию  и десериализацию объектов
 class BaseSerializer:
 
     def __init__(self, obj):

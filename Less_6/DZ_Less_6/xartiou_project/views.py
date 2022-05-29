@@ -201,6 +201,7 @@ class AddWatchmanByWatchCreateView(CreateView):
         watch.add_watchman(watchman)
 
 
+# при получении url='/api/' запаковываем список объектов
 @AppRoute(routes=routes, url='/api/')
 class WatchApi:
     @Debug(name='WatchApi')
