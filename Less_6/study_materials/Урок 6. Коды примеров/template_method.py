@@ -5,6 +5,7 @@ class Notifier(metaclass=ABCMeta):
     def __init__(self):
         self._log_list = []
 
+    # алгоритм
     def notify(self, address, subject, message):
         self._login()
         self._send(address, subject, message)
