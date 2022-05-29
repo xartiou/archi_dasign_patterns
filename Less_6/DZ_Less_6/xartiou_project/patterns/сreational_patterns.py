@@ -1,10 +1,12 @@
 import copy
-import quopri
+from quopri import decodestring
+from behavioral_patterns import Subject, FileWriter
 
 
 # абстрактный пользователь
 class User:
-    pass
+    def __init__(self, name):
+        self.name = name
 
 
 # офицер
@@ -14,7 +16,10 @@ class Officer(User):
 
 # вахтеный
 class Watchman(User):
-    pass
+
+    def __init__(self, name):
+        self.watches = []
+        super().__init__(name)
 
 
 # порождающий паттерн Абстрактная фабрика - фабрика пользователей
@@ -38,12 +43,22 @@ class WatchPrototype:
         return copy.deepcopy(self)
 
 
-class Watch(WatchPrototype):
+class Watch(WatchPrototype, Subject):
 
     def __init__(self, name, category):
         self.name = name
         self.category = category
         self.category.watches.append(self)
+        self.watchmans = []
+        super().__init__()
+
+    def __getitem__(self, item):
+        return self.watchmans[item]
+
+    def add_watchman(self, watchman: Watchman):
+        self.watchmans.append(watchman)
+        watchman.watches.append(self)
+        self.notify()
 
 
 # Морская вахта
@@ -92,7 +107,7 @@ class WatchFactory:
 class Engine:
     def __init__(self):
         self.officer = []
-        self.watchman = []
+        self.watchmans = []
         self.watches = []
         self.categories = []
 
@@ -121,10 +136,15 @@ class Engine:
                 return item
         return None
 
+    def get_watchman(self, name) -> Watchman:
+        for item in self.watchmans:
+            if item.name == name:
+                return item
+
     @staticmethod
     def decode_value(val):
         val_b = bytes(val.replace('%', '=').replace("+", " "), 'UTF-8')
-        val_decode_str = quopri.decodestring(val_b)
+        val_decode_str = decodestring(val_b)
         return val_decode_str.decode('UTF-8')
 
 
@@ -150,9 +170,10 @@ class SingletonByName(type):
 
 class Logger(metaclass=SingletonByName):
 
-    def __init__(self, name):
+    def __init__(self, name, writer=FileWriter()):
         self.name = name
+        self.writer = writer
 
-    @staticmethod
-    def log(text):
+    def log(self, text):
         print('log--->', text)
+        self.writer.write(text)
