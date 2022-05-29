@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+Создание вахты
+{% endblock %}
+{% block style %}
+	{% include "inc-style.html" %}
+{% endblock %}
+{% block menu %}
+	{% include "inc-menu.html" %}
+{% endblock %}
+{% block body %}
+	<div>
+		<li>
+			<a href="/watchman-list/">Список вахтенных</a>
+		</li>
+		<li>
+			<a href="/create-watchman/">Создать вахтенного</a>
+		</li>
+	</div>
+    <h1>Добавление вахтенного на вахту</h1>
+    <form method="post">
+        <select size="3" name="watch_name">
+            {% for item in watches %}
+            <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}
+        </select>
+        <select size="3" name="watchman_name">
+            {% for item in watchmans %}
+            <option value="{{item.name}}">{{item.name}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Записать</button>
+    </form>
+{% endblock %}
