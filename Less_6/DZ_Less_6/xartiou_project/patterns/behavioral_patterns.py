@@ -54,12 +54,15 @@ class BaseSerializer:
 class TemplateView:
     template_name = 'template.html'
 
+    # получаем контекст
     def get_context_data(self):
         return {}
 
+    # получаем шаблон
     def get_template(self):
         return self.template_name
 
+    # передаем контекст в шаблон и рендерим
     def render_template_with_context(self):
         template_name = self.get_template()
         context = self.get_context_data()
@@ -88,6 +91,7 @@ class ListView(TemplateView):
         return context
 
 
+# получаем данные из POST запроса и на их основе создаем новый объект
 class CreateView(TemplateView):
     template_name = 'create.html'
 

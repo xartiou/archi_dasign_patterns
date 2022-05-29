@@ -4,10 +4,10 @@ from xartiou_framework.templator import render
 from patterns.сreational_patterns import Engine, Logger
 from patterns.structural_patterns import AppRoute, Debug
 from patterns.behavioral_patterns import SmsNotifier, EmailNotifier, \
-    ListView, CreateView, BaseSerializer
+    ListView, CreateView, BaseSerializer, ConsoleWriter, FileWriter
 
 site = Engine()
-logger = Logger('main')
+logger = Logger('main', ConsoleWriter())
 sms_notifier = SmsNotifier()
 email_notifier = EmailNotifier
 
@@ -164,12 +164,14 @@ class CopyWatch:
             return '200 OK', 'No watches have been added yet'
 
 
-@AppRoute(routes=routes, url='/watch-list/')
-class WatchListView(ListView):
+#  список вахтенных
+@AppRoute(routes=routes, url='/watchman-list/')
+class WatchmanListView(ListView):
     queryset = site.watchmans
-    template_name = 'watch_list.html'
+    template_name = 'watchman_list.html'
 
 
+# создание вахтенного
 @AppRoute(routes=routes, url='/create-watchman/')
 class WatchmanCreateView(CreateView):
     template_name = 'create_watchman.html'
@@ -181,6 +183,7 @@ class WatchmanCreateView(CreateView):
         site.watchmans.append(new_obj)
 
 
+# добавление вахтенного на вахту
 @AppRoute(routes=routes, url='/add-watchman/')
 class AddWatchmanByWatchCreateView(CreateView):
     template_name = 'add_watchman.html'
