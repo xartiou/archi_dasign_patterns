@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+Главная страница
+{% endblock %}
+{% block style %}
+	{% include "inc-style.html" %}
+{% endblock %}
+{% block menu %}
+	{% include "inc-menu.html" %}
+{% endblock %}
+{% block body %}
+	<div>
+		<a href="/create-category/">Создать новую категорию</a>
+	</div>
+	<div>
+		<h1>Список существующих категорий</h1>
+        {% for item in objects_list %}
+        <li>
+            {{item.name}} <span>Количество вахт: {{item.watch_count()}}</span>
+			<a href="/watches-list/?id={{item.id}}">Показать вахты</a>
+        </li>
+        {% endfor %}
+	<br>
+		<hr>
+	</div>
+    <div>
+		<li>
+			<a href="/watchman-list/">Список вахтенных</a>
+		</li>
+		<li>
+			<a href="/create-watchman/">Создать вахтенного</a>
+		</li>
+		<li>
+			<a href="/add-watchman/">Добавить вахтенного на вахту</a>
+		</li>
+	</div>
+{% endblock %}

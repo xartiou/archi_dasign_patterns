@@ -9,24 +9,24 @@ class User:
         self.name = name
 
 
-# преподаватель
-class Teacher(User):
+# Офицер
+class Officer(User):
     pass
 
 
-# студент
-class Student(User):
+# вахтенный
+class Watchman(User):
 
     def __init__(self, name):
-        self.courses = []
+        self.watches = []
         super().__init__(name)
 
 
 # порождающий паттерн Абстрактная фабрика - фабрика пользователей
 class UserFactory:
     types = {
-        'student': Student,
-        'teacher': Teacher
+        'watchman': Watchman,
+        'officer': Officer
     }
 
     # порождающий паттерн Фабричный метод
@@ -35,39 +35,39 @@ class UserFactory:
         return cls.types[type_](name)
 
 
-# порождающий паттерн Прототип - Курс
-class CoursePrototype:
-    # прототип курсов обучения
+# порождающий паттерн Прототип - Вахта
+class WatchPrototype:
+    # прототип корабельных вахт
 
     def clone(self):
         return deepcopy(self)
 
 
-class Course(CoursePrototype, Subject):
+class Watch(WatchPrototype, Subject):
 
     def __init__(self, name, category):
         self.name = name
         self.category = category
-        self.category.courses.append(self)
-        self.students = []
+        self.category.watches.append(self)
+        self.watchmans = []
         super().__init__()
 
     def __getitem__(self, item):
-        return self.students[item]
+        return self.watchmans[item]
 
-    def add_student(self, student: Student):
-        self.students.append(student)
-        student.courses.append(self)
+    def add_student(self, watchman: Watchman):
+        self.watchmans.append(watchman)
+        watchman.watches.append(self)
         self.notify()
 
 
-# Интерактивный курс
-class InteractiveCourse(Course):
+# Морская вахта
+class SeaWatch(Watch):
     pass
 
 
-# Курс в записи
-class RecordCourse(Course):
+# Портовая вахта
+class PortWatch(Watch):
     pass
 
 
@@ -81,20 +81,20 @@ class Category:
         Category.auto_id += 1
         self.name = name
         self.category = category
-        self.courses = []
+        self.watches = []
 
-    def course_count(self):
-        result = len(self.courses)
+    def watch_count(self):
+        result = len(self.watches)
         if self.category:
-            result += self.category.course_count()
+            result += self.category.watch_count()
         return result
 
 
-# порождающий паттерн Абстрактная фабрика - фабрика курсов
-class CourseFactory:
+# порождающий паттерн Абстрактная фабрика - фабрика вахт
+class WatchFactory:
     types = {
-        'interactive': InteractiveCourse,
-        'record': RecordCourse
+        'seawatch': SeaWatch,
+        'portwatch': PortWatch
     }
 
     # порождающий паттерн Фабричный метод
@@ -106,9 +106,9 @@ class CourseFactory:
 # Основной интерфейс проекта
 class Engine:
     def __init__(self):
-        self.teachers = []
-        self.students = []
-        self.courses = []
+        self.officers = []
+        self.watchmans = []
+        self.watches = []
         self.categories = []
 
     @staticmethod
@@ -127,17 +127,17 @@ class Engine:
         raise Exception(f'Нет категории с id = {id}')
 
     @staticmethod
-    def create_course(type_, name, category):
-        return CourseFactory.create(type_, name, category)
+    def create_watch(type_, name, category):
+        return WatchFactory.create(type_, name, category)
 
-    def get_course(self, name):
-        for item in self.courses:
+    def get_watch(self, name):
+        for item in self.watches:
             if item.name == name:
                 return item
         return None
 
-    def get_student(self, name) -> Student:
-        for item in self.students:
+    def get_watchman(self, name) -> Watchman:
+        for item in self.watchmans:
             if item.name == name:
                 return item
 

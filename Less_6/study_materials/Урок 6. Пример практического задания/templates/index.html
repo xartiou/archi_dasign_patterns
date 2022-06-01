@@ -16,8 +16,8 @@
 		<h1>Список существующих категорий</h1>
         {% for item in objects_list %}
         <li>
-            {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
-			<a href="/courses-list/?id={{item.id}}">Показать курсы</a>
+            {{item.name}} <span>Количество курсов: {{item.watch_count()}}</span>
+			<a href="/watches-list/?id={{item.id}}">Показать вахты</a>
         </li>
         {% endfor %}
 		<br>
@@ -25,13 +25,13 @@
 	</div>
     <div>
 		<li>
-			<a href="/student-list/">Список студентов</a>
+			<a href="/watchman-list/">Список вахтенных</a>
 		</li>
 		<li>
-			<a href="/create-student/">Создать студента</a>
+			<a href="/create-watchman/">Создать вахтенного</a>
 		</li>
 		<li>
-			<a href="/add-student/">Добавить студента на курс</a>
+			<a href="/add-watchman/">Добавить вахтенного на вахту</a>
 		</li>
 	</div>
 {% endblock %}
