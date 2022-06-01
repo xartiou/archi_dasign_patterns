@@ -1,15 +1,20 @@
 from datetime import date
 
 from xartiou_framework.templator import render
-from patterns.сreational_patterns import Engine, Logger
+from patterns.сreational_patterns import Engine, Logger, MapperRegistry
 from patterns.structural_patterns import AppRoute, Debug
 from patterns.behavioral_patterns import SmsNotifier, EmailNotifier, \
     ListView, CreateView, BaseSerializer, ConsoleWriter, FileWriter
+from patterns.architectural_system_pattern_unit_of_work import UnitOfWork
 
 site = Engine()
 logger = Logger('main')
 sms_notifier = SmsNotifier()
 email_notifier = EmailNotifier
+# создание нового потока
+UnitOfWork.new_current()
+# подключение реестра
+UnitOfWork.get_current().set_mapper_registry(MapperRegistry)
 
 
 routes = {}
@@ -167,8 +172,12 @@ class CopyWatch:
 #  список вахтенных
 @AppRoute(routes=routes, url='/watchman-list/')
 class WatchmanListView(ListView):
-    queryset = site.watchmans
     template_name = 'watchman_list.html'
+
+    # получаем маппер и через него получаем все записи о вахтенных
+    def get_queryset(self):
+        mapper = MapperRegistry.get_current_mapper('watchman')
+        return mapper.all()
 
 
 # создание вахтенного
@@ -181,6 +190,9 @@ class WatchmanCreateView(CreateView):
         name = site.decode_value(name)
         new_obj = site.create_user('watchman', name)
         site.watchmans.append(new_obj)
+#         помечаем как новый и делаем комит
+        new_obj.mark_new()
+        UnitOfWork.get_current().commit()
 
 
 # добавление вахтенного на вахту
